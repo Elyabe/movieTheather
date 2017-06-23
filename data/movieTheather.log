@@ -1,0 +1,8 @@
+/*C21*/SET SCHEMA PUBLIC
+alter table movie add column author varchar(255)
+alter table movie add column date_realease timestamp
+alter table movie add column director varchar(255)
+alter table movie add column origin_country varchar(255)
+alter table movie add column sinopse varchar(255)
+alter table movie add column title varchar(255)
+alter table movie add column url_cover varchar(255)
