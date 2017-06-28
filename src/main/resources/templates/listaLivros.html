@@ -1,33 +1,36 @@
 <html>
   <head>
   <title>Reading List</title>
-  </head>
+   <link rel="stylesheet" type="text/css" th:href="@{/stylesheets/bootstrap.min.css}"/>
+	<script th:src="@{javascripts/jquery-3.2.1.min.js}"></script>
+	<script th:src="@{javascripts/bootstrap.min.js}"></script>
+</head>
+  
   <body>
-        <h2>Lista de Livros por Autor</h2>
-        <div th:unless="${#lists.isEmpty(livros)}">
-              <dl th:each="livro : ${livros}">
+        <h2>Lista de Filmes por Autor</h2>
+        <div th:unless="${#lists.isEmpty(movies)}">
+              <dl th:each="movie : ${movies}">
                     <dt class="bookHeadline">
-                          <span th:text="${livro.titulo}">Title</span> by <span
-                                th:text="${livro.autor}">Author</span> (ISBN: <span
-                                th:text="${livro.isbn}">ISBN</span>)
-   
+                          <span th:text="${movie.title}">Title</span> by <span
+                                th:text="${movie.author}">Author</span>
+   						 <span th:text="${movie.urlCover}">Cover</span>
                     </dt>
                     <dd class="bookDescription">
-                          <span th:if="${livro.description}" th:text="${livro.description}">Description</span>
-                          <span th:if="${livro.description eq null}"> Nenhuma descrição foi adicionada para esse livro!</span>
+                          <span th:if="${movie.sinopse}" th:text="${movie.sinopse}">Sinopse</span>
+                          <span th:if="${movie.sinopse eq null}"> Nenhuma descrição foi adicionada para esse movie!</span>
                     </dd>
               </dl>
         </div>
-        <div th:if="${#lists.isEmpty(livros)}">
-              <p>Nenhum Livro Cadastrado para esse autor</p>
+        <div th:if="${#lists.isEmpty(movies)}">
+              <p>Nenhum movie Cadastrado para esse autor</p>
         </div>
         <hr />
-        <h3>Adicione um novo livro para o autor:</h3>
+        <h3>Adicione um novo movie para o autor:</h3>
         <form method="POST">
-              <label for="title">Title:</label> <input type="text" name="titulo" size="50"></input><br />  
-              <label for="isbn">ISBN:</label> <input type="text" name="isbn" size="15"></input><br /> 
-              <label      for="description">Description:</label><br />
-              <textarea name="description" cols="80" rows="5"> </textarea>
+              <label for="title">Title:</label> <input type="text" name="title" size="50"></input><br />  
+              <label for="urlCover">urlCover:</label> <input type="text" name="urlCover" size="50"></input><br /> 
+ 
+   
               <br /> <input type="submit"></input>
         </form>
   </body>

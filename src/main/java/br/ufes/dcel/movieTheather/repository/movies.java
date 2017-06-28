@@ -9,10 +9,8 @@ import br.ufes.dcel.movieTheather.model.Movie;
 public interface movies extends JpaRepository<Movie, Long> {
 	   
    
-    List<Movie> findByAutor(String autor);
+    List<Movie> findByAuthor(String author);
    
-    List<Movie> findByTitulo(String titulo);
-  
-    Movie findByIsbn(String isbn);
+    List<Movie> findByTitle(String title);
 
 }
