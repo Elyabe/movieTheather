@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	layout:decorator="movieTheather/layout/layoutPadrao" th:with="activeTab='listagem'"
+>
+
+
+<head>
+	<title>Add a movie </title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+ 	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/bootstrap.min.css}"/>
+	<script th:src="@{/javascripts/jquery-3.2.1.min.js}"></script>
+	<script th:src="@{/javascripts/bootstrap.min.js}"></script>
+	<style>
+			.jumbotron {
+				width: 500px;
+				#margin-top: 20px;
+				margin-left: auto;
+				margin-right: auto;
+				padding: 20px 20px 20px 20px;
+			}
+		</style>
+</head>
+
+
+
+
+<body>
+
+  <section layout:fragment="conteudo">	
+	<!-- <div th:replace="beer/Navbar :: navbar('cadastro')"></div> -->
+	<div class="jumbotron">
+		<h1>New movie</h1>
+	
+		<form method="POST" th:object="${movie}" th:action="@{*{author}}">
+	
+			<!-- <input type="hidden" name="idMovie" value="${idMovie}"/> -->
+			<div class="form-group">
+				<label for="title" class="control-label">Title</label>
+				<input id="title" class="form-control" type="text" th:field="*{title}" /> <br/>
+			</div>
+			
+			<div class="form-group">
+				<label for="originCountry" class="control-label">Origin Country</label>
+				<input id="originCountry" class="form-control" type="text" th:field="*{originCountry}"/> <br/>
+			</div>
+			
+			<div class="form-group">
+				<label for="category" class="control-label">Category</label>
+				<select id="tipo" class="form-control" th:field="*{category}">
+					<option value="">Select a category</option>
+					<option th:each="category : ${lstCategory}" th:value="${category.idCategory}" th:text="${category.label}"></option>
+				</select>
+			</div>
+			
+			<div class="row">
+				<div class="form-group col-sm-6">
+					<label for="author" class="control-label">Author</label>
+					<input id="author" class="form-control" type="text" th:field="*{author}"/> <br/>
+				</div>
+				
+				<div class="form-group col-sm-6" >
+					<label for="durationMin" class="control-label">Duration</label>
+					<input id="durationMin" class="form-control" type="text" th:field="*{durationMin}"/> <br/>
+				</div>
+			</div>
+			
+			<div class="form-group col-sm-6">
+					<label for="urlCover" class="control-label">Url Cover</label>
+					<input id="urlCover" class="form-control" type="text" th:field="*{urlCover}"/> <br/>
+				</div>
+				
+			<div class="form-group col-sm-6" >
+					<label for="director" class="control-label"></label>
+					<input id="director" class="form-control" type="text" th:field="*{director}"/> <br/>
+				</div>
+				
+			<div class="form-group col-sm-12" >
+					<label for="sinopse" class="control-label">Sinopse</label>
+              		<textarea name="sinopse" cols="70" rows="5" th:field="*{sinopse}"> </textarea>		
+			</div>
+		
+			
+			
+			<!-- <div class="form-group" th:classappend="${#fields.hasErrors('tipo')} ? has-error">
+				<label for="tipo" class="control-label">Tipo</label>
+				<select id="tipo" class="form-control" th:field="*{tipo}">
+					<option value="">Selecione o tipo</option>
+					<option th:each="tipo : ${tipos}" th:value="${tipo}" th:text="${tipo.descricao}"></option>
+				</select>
+			</div> -->
+			
+			
+			<button type="submit" class="btn btn-primary btn-block">Salvar</button>
+			
+		</form>
+		
+	</div>
+	</section>
+</body>
+</html>
