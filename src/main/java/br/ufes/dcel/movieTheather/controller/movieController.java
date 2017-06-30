@@ -39,13 +39,13 @@ public class movieController {
             return "listaLivros";
       }
  
-      @RequestMapping("/home")
+      @RequestMapping
       public ModelAndView loadHome()
       {
     	  return new ModelAndView("movieTheather/home");
       }
       
-      @RequestMapping(value="/Movies")
+      @RequestMapping(value="/showMovies")
       public ModelAndView showMoviess() 
       {
     	  ModelAndView mv = new ModelAndView("/movieTheather/listMovies");
@@ -57,7 +57,7 @@ public class movieController {
           return mv;
       }
       
-      @RequestMapping(value="/new")
+      @RequestMapping(value="/newMovie")
       public ModelAndView newMovie( Movie movie ) 
       {   
     	  ModelAndView mv = new ModelAndView("/movieTheather/addMovie");
@@ -82,13 +82,13 @@ public class movieController {
            
             myMovies.save(movie);
             
-            return "redirect:/movieTheather/Movies";
+            return "redirect:/movieTheather/ShowMovies";
       }
       
-      @RequestMapping("/remove")
- 	 public String remove( Long id)
+      @RequestMapping("/removeMovie/{id}")
+ 	 public String remove( @PathVariable("id") Movie movie )
  	 {
-    	  this.myMovies.delete(6L);
- 		 return "redirect:/movieTheather/Movies";
+    	  this.myMovies.delete(movie);;
+ 		 return "redirect:/movieTheather/showMovies";
  	 }
 }
