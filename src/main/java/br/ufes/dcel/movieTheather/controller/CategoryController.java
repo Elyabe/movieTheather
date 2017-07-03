@@ -30,7 +30,7 @@ public class CategoryController
      public String saveCategory( Category category) 
 	 {
           	this.myCategories.save(category);
-           return "redirect:/movieTheather/new";
+           return "redirect:/movieTheather/newMovie";
      }
 	 
 	 
