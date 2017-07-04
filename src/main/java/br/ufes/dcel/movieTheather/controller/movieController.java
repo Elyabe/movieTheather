@@ -45,7 +45,7 @@ public class movieController {
       @RequestMapping
       public ModelAndView loadHome()
       {
-    	  return new ModelAndView("movieTheather/home");
+    	  return new ModelAndView("redirect:/movieTheather/showMovies");
       }
       
       @RequestMapping(value="/showMovies")
@@ -90,6 +90,9 @@ public class movieController {
 			{
 				return newMovie( movie );
 			}
+			if ( movie.getUrlCover().isEmpty() ) 
+				movie.setUrlCover("cover_default.png");
+				
 		    myMovies.save(movie);
 		    attribute.addFlashAttribute("mensagem", "Success! :D");
             return new ModelAndView("redirect:/movieTheather/newMovie");
@@ -106,7 +109,7 @@ public class movieController {
   	}
       
     @RequestMapping(value="/updateMovie", method=RequestMethod.POST)
-	public ModelAndView atualizar(@Valid Movie movie, BindingResult result, RedirectAttributes attribute )
+	public ModelAndView updateMovie(@Valid Movie movie, BindingResult result, RedirectAttributes attribute )
 	{
 		System.out.println("ATUALIZAR");
 		
@@ -126,4 +129,6 @@ public class movieController {
     	  this.myMovies.delete(movie);;
  		 return "redirect:/movieTheather/showMovies";
  	 }
+     
+
 }

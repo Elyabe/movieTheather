@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	layout:decorator="movieTheather/layout/layoutPadrao" th:with="activeTab='listagem'"
+>
+
+<head>
+	<title>Edit a category </title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+ 	
+	<style>
+			.jumbotron {
+				width: 500px;
+				#margin-top: 20px;
+				margin-left: auto;
+				margin-right: auto;
+				padding: 20px 20px 20px 20px;
+			}
+		</style>
+</head>
+
+
+
+
+<body>
+
+  <section layout:fragment="conteudo">	
+  
+	<div class="jumbotron">
+		<h1>Delete Category</h1>
+		
+		
+			
+		<form method="POST" th:object="${category}" th:action="@{/movieTheather/removeCategory/{id}(id=${category.idCategory})}" >
+				Exists <span th:text="${category.lstMovies.size()}" ></span> movie(s). Confirm deletion?	
+			<button class="btn btn-block"> <a th:href="@{/movieTheather}">Back</a></button>
+			<button type="submit" class="btn btn-primary btn-block">Yes</button>
+			
+		</form>
+		
+	</div>
+	</section>
+</body>
+</html>
