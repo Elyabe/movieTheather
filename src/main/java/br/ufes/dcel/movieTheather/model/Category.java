@@ -11,11 +11,36 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name="tbl_category")
 public class Category 
 {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long idCategory;
+	
+	@NotBlank(message="{label.NotBlank}")
+	@Column
+	private String label;
+	
+	@NotNull(message="{ageLimit.NotNull}")
+	@Column
+	private Long ageLimit;
+	
+	
+	@Column
+	private String observation;
+	
+	
+	@OneToMany(mappedBy = "category", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	private List<Movie> lstMovies;
+
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -64,23 +89,6 @@ public class Category
 			return false;
 		return true;
 	}
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long idCategory;
-	
-	@Column
-	private String label;
-	
-	@Column
-	private Long ageLimit;
-	
-	@Column
-	private String observation;
-	
-	
-	@OneToMany(mappedBy = "category", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	private List<Movie> lstMovies;
 
 	public Long getIdCategory() {
 		return idCategory;

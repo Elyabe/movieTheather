@@ -4,7 +4,7 @@
 >
 
 <head>
-	<title>Add a category </title>
+	<title>Edit a category </title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
  	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/bootstrap.min.css}"/>
@@ -29,17 +29,19 @@
   <section layout:fragment="conteudo">	
   
 	<div class="jumbotron">
-		<h1>New Category</h1>
+		<h1>Edit Category</h1>
 	
 		
 			
-		<form method="POST" th:object="${category}" th:action="@{/movieTheather/saveCategory}" >
+		<form method="POST" th:object="${category}" th:action="@{/movieTheather/updateCategory/{id}(id=${category.idCategory})}" >
 			
+			<input type="hidden" name="idCategory" th:field="${category.idCategory}"/> 
 			<div class="alert alert-success" th:if="${not #strings.isEmpty(mensagem)}">
 				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 				<span class="glyphicon glyphicon-ok" ></span>
 				<span th:text="${mensagem}" ></span>
 			</div>
+		<span th:text="*{idCategory}" ></span>
 			
 			<div class="form-group alert alert-danger" th:if="${#fields.hasAnyErrors()}">
 				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -50,6 +52,7 @@
 				</th:block>
 				
 			</div>
+			
 			<div class="form-group"  th:classappend="${#fields.hasErrors('label')} ? has-error">
 				<label for="label" class="control-label">Label</label>
 				<input id="label" class="form-control" type="text" th:field="*{label}"/> <br/>

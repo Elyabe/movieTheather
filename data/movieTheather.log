@@ -1,9 +1,5 @@
 /*C21*/SET SCHEMA PUBLIC
-DELETE FROM TBL_MOVIE WHERE ID_MOVIE=7
-INSERT INTO TBL_MOVIE VALUES(7,'juca',NULL,'joao',145,'USA','Se juca \u00e9 uma galinha de 3 kg ent\u00e3o qual \u00e9 o peso da ma\u00e7\u00e3?','Romeu e Julieta','TRIDIMENTIONAL','',2015,2)
-COMMIT
-DELETE FROM TBL_MOVIE WHERE ID_MOVIE=7
-INSERT INTO TBL_MOVIE VALUES(7,'juca',NULL,'joao',145,'USA','Se juca \u00e9 uma galinha de 3 kg ent\u00e3o qual \u00e9 o peso da ma\u00e7\u00e3?','Romeu e Julieta','TRIDIMENTIONAL','velozes_furiosos.jpg',2015,2)
+INSERT INTO TBL_MOVIE VALUES(27,'sdfsd',NULL,'dfgdf',5435,'sdfsd','dsfsdfs','Ola mundo!','TRIDIMENTIONAL','cover_default.png',5252,31)
 COMMIT
 DISCONNECT
 /*C20*/SET SCHEMA PUBLIC
