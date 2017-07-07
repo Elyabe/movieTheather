@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -59,12 +60,12 @@ public class Movie
       
 
       @Column( nullable=true)
-      @Size(min=3, max= 50)
+      @Size(min=0, max= 50)
       private String urlCover;
       
 
       @NotBlank( message="{sinopse.NotBlank}" )
-      @Size(min=15, max= 25)
+      @Size(min=15, max= 500)
       @Column
       private String sinopse;
       
@@ -76,6 +77,7 @@ public class Movie
 
       @NotNull( message="{yearRelease.NotNull}" )
       @Min(value=1950)
+      @Max(value=3000)
       @Column
       private Long yearRelease;
       

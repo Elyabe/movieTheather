@@ -39,7 +39,7 @@ public class Category
 	
 	
 	@Column
-	@Size(min=10, max= 120)
+	@Size(min=10, max= 200)
 	private String observation;
 	
 	
