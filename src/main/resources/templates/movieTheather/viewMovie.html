@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	layout:decorator="movieTheather/layout/layoutPadrao" th:with="activeTab='listagem'"
+>
+
+
+<head>
+	<title>Edit movie </title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<style>
+			.jumbotron {
+				width: 1000px;
+				#margin-top: 20px;
+				margin-left: auto;
+				margin-right: auto;
+				padding: 20px 20px 20px 20px;
+			}
+		</style>
+</head>
+
+
+
+
+<body>
+
+  <section layout:fragment="conteudo">	
+	<!-- <div th:replace="beer/Navbar :: navbar('cadastro')"></div> -->
+	<div class="jumbotron row" th:object="${movie}">
+		
+		<div class="col-sm-6">
+			<div class="thumbnail">
+		                <img th:src="@{/img/{url}(url=${movie.urlCover})}" class=""/>
+		                <div class="caption">
+		                     <a href="#" class="btn btn-default btn-xs pull-right" role="button" th:href="@{/movieTheather/editMovie/{id} (id=${movie.idMovie})}"><i class="glyphicon glyphicon-edit"></i></a>  
+		                     <a class="btn btn-default btn-xs pull-right" th:href="@{/movieTheather/removeMovie/{id} (id=${movie.idMovie})}"><span class="red glyphicon glyphicon-remove"></span></a>
+		                </div>
+		    </div>
+		 </div>
+		
+		
+		<div class="col-sm-6">
+			<h1 th:text="*{title}"></h1>
+			<span id="category" class="label label-primary" type="text" th:text="*{category.label}"/> 
+			<span class="label label-danger"  th:text="*{originCountry}"/>
+			<span class="label label-default" th:text="*{durationMin}"/> min<br/>
+			<h5 class="text" th:text="*{director}"> </h5> 
+			<span class="text" th:text="*{author}"/> <br/>
+			
+				<div class="alert alert-success" th:if="${not #strings.isEmpty(mensagem)}">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<span class="glyphicon glyphicon-ok" ></span>
+					<span th:text="${mensagem}" ></span>
+				</div>
+				
+				<div class="form-group alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<th:block th:each="erro: ${#fields.detailedErrors()}">
+						<span class="glyphicon glyphicon-th-remove" ></span>
+						<br><span th:text="${erro.message}" /></br>
+	
+					</th:block>					
+				</div>
+				
+					
+					<!-- 	
+						<div class="form-group col-sm-6" th:classappend="${#fields.hasErrors('yearRelease')} ? has-error" >
+								<label for="yearRelease" class="control-label">Year release</label>
+								<span id="yearRelease" class="form-control" type="text" th:text="*{yearRelease}"/> <br/>
+						</div> -->
+					
+				<div class="row">
+					<div class="form-group col-sm-12" th:classappend="${#fields.hasErrors('sinopse')} ? has-error" >
+							<label for="sinopse" class="control-label">Sinopse</label>
+		              		<p  th:text="*{sinopse}"></p>		
+					</div> 
+				</div>
+		</div>
+	</div>
+	</section>
+</body>
+</html>

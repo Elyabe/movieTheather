@@ -120,4 +120,12 @@ public class CategoryController
     	  myCategories.delete(category);
  		 return "redirect:/movieTheather/showCategories";
  	 }
+	 
+	 @RequestMapping("/showMoviesbyCategory/{id}")
+  	public ModelAndView viewMovie( @PathVariable("id") Category category )
+  	{
+  		ModelAndView mv = new ModelAndView("/movieTheather/listMovies");
+  		mv.addObject("movies", category.getLstMovies() );
+  		return mv;
+  	}
 }
