@@ -104,16 +104,9 @@ public class CategoryController
 		
 		
 		 @RequestMapping("/removeCategory/{id}")
-	 	 public ModelAndView remove( @PathVariable("id") Category category, BindingResult result,
-	 			 RedirectAttributes attribute )
+	 	 public ModelAndView remove( @PathVariable("id") Category category)
 	 	 {
-	    	 if( result.hasErrors() )
-	    	 {
-	    		 return removeConfirm( category );
-	    	 }
-			 
 	    	 myCategories.delete(category);
-	    	 attribute.addFlashAttribute("message", "Category deleted : Success ! ");
 	 		 return new ModelAndView("redirect:/movieTheather/showCategories");
 	 	 }
 		 
