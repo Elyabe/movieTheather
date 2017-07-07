@@ -107,7 +107,17 @@ public class movieController {
   		mv.addObject("lstTech", TypeTech.values() );
   		return mv;
   	}
+    
+    @RequestMapping("/viewMovie/{idMovie}")
+  	public ModelAndView viewMovie( @PathVariable("idMovie") Movie movie )
+  	{
+  		ModelAndView mv = new ModelAndView("/movieTheather/viewMovie");
+  		mv.addObject("movie", movie );
+  		return mv;
+  	}
+    
       
+    
     @RequestMapping(value="/updateMovie", method=RequestMethod.POST)
 	public ModelAndView updateMovie(@Valid Movie movie, BindingResult result, RedirectAttributes attribute )
 	{

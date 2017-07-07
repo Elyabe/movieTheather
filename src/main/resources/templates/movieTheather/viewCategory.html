@@ -27,15 +27,38 @@
   <section layout:fragment="conteudo">	
   
 	<div class="jumbotron">
-		<h1>Delete Category</h1>
+		<h1 th:text="${category.label}"></h1>
+		<h3 th:text="${category.ageLimit}"></h3>
 		
-		
+		Exists <span th:text="${category.lstMovies.size()}" ></span> movie(s). Confirm deletion?
+		<div class="table-responsive" >
+	<table id="tabela-cervejas" class="table table-striped table-bordered table-hover table-condensed">
+			<thead>
+				<tr>
+					<th class="text-center">Movies</th>
+					<th class="text-center">Year Release</th>
+					
+				</tr>
+			</thead>
+		<tbody>
+			<tr th:each="movie : ${category.lstMovies}">
+				<td> <a th:href="@{/movieTheather/view/{id}(id=${movie.idMovie})}" th:text="${movie.title}"></a></td>
+				<td th:text="*{yearRelease}"></td>
+			</tr>
+			<tr th:if="${category.lstMovies.empty}">
+				<td colspan="6">Nenhuma filme cadastrado!</td>
+			</tr>
 			
+		</tbody>		
+	</table>
+
+	
+	</div>
+		
+		<button class="btn btn-block"> <a th:href="@{/movieTheather}">Back</a></button>
 		<form method="POST" th:object="${category}" th:action="@{/movieTheather/removeCategory/{id}(id=${category.idCategory})}" >
-				Exists <span th:text="${category.lstMovies.size()}" ></span> movie(s). Confirm deletion?	
-			<button class="btn btn-block"> <a th:href="@{/movieTheather}">Back</a></button>
-			<button type="submit" class="btn btn-primary btn-block">Yes</button>
-			
+					
+			<button type="submit" class="btn btn-danger btn-block">Yes</button>
 		</form>
 		
 	</div>
