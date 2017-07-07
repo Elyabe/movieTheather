@@ -45,23 +45,11 @@ public class CategoryController
 	 
 	 
 	 
-	/* @RequestMapping("/{category}")
-	 public ModelAndView listar( Category category )
-	 {
-		 
-		 List<Movie> lstMovies = myCategories.findOne( category.getIdCategory() ).getLstMovies();
-		 ModelAndView mv = new ModelAndView("/movieTheather/listMovies");
-		 mv.addObject("movies", lstMovies);
-		 
-		 return mv;
-	 }*/
-	 
 	 @RequestMapping(value="/showCategories")
      public ModelAndView showMoviess() 
      {
-   	  ModelAndView mv = new ModelAndView("/movieTheather/listCategories");
-   	  List<Category> lstCategory = myCategories.findAll();
-//   	  List<Movie> listaMovies = myCategories.findOne(2L).getLstMovies();
+	   	  ModelAndView mv = new ModelAndView("/movieTheather/listCategories");
+	   	  List<Category> lstCategory = myCategories.findAll();
          if ( lstCategory != null) {
                mv.addObject("lstCategory", lstCategory );
          }
@@ -76,56 +64,64 @@ public class CategoryController
            return new ModelAndView("/movieTheather/addCategory");
      }
 	
-	@RequestMapping("/editCategory/{idCategory}")
-  	public ModelAndView editCategory( @PathVariable("idCategory") Category category )
-  	{
-  		System.out.println("Id ao prencher" + category.getIdCategory());
-		ModelAndView mv = new ModelAndView("/movieTheather/editCategory");
-  		mv.addObject("category", category);
-  		System.out.println("Id ao add no model" + category.getIdCategory());
-  		return mv;
-  	}
-	 
-	 
-	@RequestMapping(value="/updateCategory/{idCategory}", method=RequestMethod.POST)
-	public ModelAndView updateCategory(@PathVariable("idCategory") Long id, Category category, BindingResult result, RedirectAttributes attribute )
-	{
-		System.out.println("ATUALIZAR");
-		System.out.println("id ao salvar"+ category.getIdCategory() );
-		category.setId(id);
-		if( result.hasErrors() )
+		@RequestMapping("/editCategory/{idCategory}")
+	  	public ModelAndView editCategory( @PathVariable("idCategory") Category category )
+	  	{
+	  		System.out.println("Id ao prencher" + category.getIdCategory());
+			ModelAndView mv = new ModelAndView("/movieTheather/editCategory");
+	  		mv.addObject("category", category);
+	  		System.out.println("Id ao add no model" + category.getIdCategory());
+	  		return mv;
+	  	}
+		 
+		 
+		@RequestMapping(value="/updateCategory/{idCategory}", method=RequestMethod.POST)
+		public ModelAndView updateCategory(@PathVariable("idCategory") Long id, Category category, 
+				BindingResult result, RedirectAttributes attribute )
 		{
-			return editCategory( category );
+			System.out.println("ATUALIZAR");
+			System.out.println("id ao salvar"+ category.getIdCategory() );
+			category.setId(id);
+			
+			if( result.hasErrors() )
+			{
+				return editCategory( category );
+			}
+			
+			myCategories.save( category );
+			
+			attribute.addFlashAttribute("message", "Success! :D");
+			return new ModelAndView("redirect:/movieTheather/showCategories");
 		}
 		
-		System.out.println("id ao salvar"+ category.getIdCategory());
-		myCategories.save( category );
+		 @RequestMapping("/removeConfirmCategory/{idMovie}")
+	 	 public ModelAndView removeConfirm(@PathVariable("idMovie") Category category )
+	 	 {
+	    	 ModelAndView mv = new ModelAndView("/movieTheather/viewCategory");
+	    	  mv.addObject("category", category);
+	 		 return mv;
+	 	 }
 		
-		attribute.addFlashAttribute("mensagem", "Success! :D");
-		return new ModelAndView("redirect:/movieTheather/");
-	}
-	
-	 @RequestMapping("/removeConfirmCategory/{idMovie}")
- 	 public ModelAndView removeConfirm(@PathVariable("idMovie") Category category )
- 	 {
-    	 ModelAndView mv = new ModelAndView("/movieTheather/viewCategory");
-    	  mv.addObject("category", category);
- 		 return mv;
- 	 }
-	
-	
-	 @RequestMapping("/removeCategory/{id}")
- 	 public String remove( @PathVariable("id") Category category )
- 	 {
-    	  myCategories.delete(category);
- 		 return "redirect:/movieTheather/showCategories";
- 	 }
-	 
-	 @RequestMapping("/showMoviesbyCategory/{id}")
-  	public ModelAndView viewMovie( @PathVariable("id") Category category )
-  	{
-  		ModelAndView mv = new ModelAndView("/movieTheather/listMovies");
-  		mv.addObject("movies", category.getLstMovies() );
-  		return mv;
-  	}
+		
+		 @RequestMapping("/removeCategory/{id}")
+	 	 public ModelAndView remove( @PathVariable("id") Category category, BindingResult result,
+	 			 RedirectAttributes attribute )
+	 	 {
+	    	 if( result.hasErrors() )
+	    	 {
+	    		 return removeConfirm( category );
+	    	 }
+			 
+	    	 myCategories.delete(category);
+	    	 attribute.addFlashAttribute("message", "Category deleted : Success ! ");
+	 		 return new ModelAndView("redirect:/movieTheather/showCategories");
+	 	 }
+		 
+		 @RequestMapping("/showMoviesbyCategory/{id}")
+	  	public ModelAndView viewMovie( @PathVariable("id") Category category )
+	  	{
+	  		ModelAndView mv = new ModelAndView("/movieTheather/listMovies");
+	  		mv.addObject("movies", category.getLstMovies() );
+	  		return mv;
+	  	}
 }

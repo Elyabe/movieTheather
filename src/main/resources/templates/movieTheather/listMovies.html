@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
-	layout:decorator="movieTheather/layout/layoutPadrao" th:with="activeTab='listagem'"
+	layout:decorator="movieTheather/layout/layoutPadrao" th:with="activeTab='home'"
 >
 
 <head>
@@ -18,13 +18,11 @@
 	   <div class="jumbotron gallery container">
 		  <h1>Welcome Movie Theather!</h1>
 		  <p>The best is here.</p>
-  
-			<div class="alert alert-success" th:if="${not #strings.isEmpty(mensagem)}">
-				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-				<span class="glyphicon glyphicon-ok" ></span>
-				<span th:text="${mensagem}" ></span>
-			</div>
-			
+  		<div class="alert alert-success" th:if="${not #strings.isEmpty(message)}">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<span class="glyphicon glyphicon-ok" ></span>
+			<span th:text="${message}" ></span>
+		</div> 
 			
 		    <div  class="row">
 		        <div th:each="movie : ${movies}"  class="col-sm-2">

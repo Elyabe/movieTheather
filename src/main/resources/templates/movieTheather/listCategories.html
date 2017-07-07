@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
-	layout:decorator="movieTheather/layout/layoutPadrao" th:with="activeTab='listagem'"
+	layout:decorator="movieTheather/layout/layoutPadrao" th:with="activeTab='myCategories'"
 >
 
 <head>
@@ -15,14 +15,13 @@
 <body>
 
   <section layout:fragment="conteudo">	
- <!-- 	<div th:replace="beer/Navbar :: navbar('listagem')"></div> -->
-
-	<h1>Listagem de categorias</h1>
-	<!-- <div class="alert alert-success" th:if="${not #strings.isEmpty(mensagem)}">
+ <div class="jumbotron">
+	<h1>Categories</h1>
+	<div class="alert alert-success" th:if="${not #strings.isEmpty(message)}">
 		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 		<span class="glyphicon glyphicon-ok" ></span>
-		<span th:text="${mensagem}" ></span>
-	</div> -->
+		<span th:text="${message}" ></span>
+	</div> 
 	
 	
 	<div>
@@ -64,6 +63,7 @@
 	
 	</div>
 	</div>
+</div>
 </section>
 </body>
 </html>
