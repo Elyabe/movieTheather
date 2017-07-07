@@ -41,7 +41,7 @@
 		<tbody>
 			<tr th:each="category : ${lstCategory}">
 				<td th:text="${category.idCategory}"></td>
-				<td> <a th:href="@{/movieTheather/view/{id}(id=${category.label})}" th:text="${category.label}"></a></td>
+				<td><a th:href="@{/movieTheather/showMoviesbyCategory/{id}(id=${category.idCategory})}"> <span class="label label-default" th:text="${category.label}"></span></a></td>
 				<td th:text="${category.ageLimit}"></td>
 				<td th:text="${category.lstMovies.size()}"></td>
 				
