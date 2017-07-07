@@ -1,24 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
-	layout:decorator="movieTheather/layout/layoutPadrao" th:with="activeTab='listagem'"
+	layout:decorator="movieTheather/layout/layoutPadrao" th:with="activeTab='addCategory'"
 >
 
 <head>
 	<title>Add a category </title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
- 	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/bootstrap.min.css}"/>
-	<script th:src="@{/javascripts/jquery-3.2.1.min.js}"></script>
-	<script th:src="@{/javascripts/bootstrap.min.js}"></script>
-	<style>
-			.jumbotron {
-				width: 500px;
-				#margin-top: 20px;
-				margin-left: auto;
-				margin-right: auto;
-				padding: 20px 20px 20px 20px;
-			}
-		</style>
 </head>
 
 
@@ -50,22 +38,25 @@
 				</th:block>
 				
 			</div>
-			<div class="form-group"  th:classappend="${#fields.hasErrors('label')} ? has-error">
-				<label for="label" class="control-label">Label</label>
+			
+		<div class="row">
+			<div class="form-group col-sm-6"  th:classappend="${#fields.hasErrors('label')} ? has-error">
+				<label for="label" class="control-label">Label*</label>
 				<input id="label" class="form-control" type="text" th:field="*{label}"/> <br/>
 			</div>
 			
-			<div class="form-group"  th:classappend="${#fields.hasErrors('ageLimit')} ? has-error">
-				<label for="ageLimit" class="control-label">Age limit</label>
+			<div class="form-group col-sm-6"  th:classappend="${#fields.hasErrors('ageLimit')} ? has-error">
+				<label for="ageLimit" class="control-label">Age limit*</label>
 				<input id="ageLimit" class="form-control" type="text" th:field="*{ageLimit}"/> <br/>
 			</div>
+		</div>	
 			
-			
-			<div class="form-group col-sm-6"  th:classappend="${#fields.hasErrors('observation')} ? has-error" >
-					<label for="observation" class="control-label">Observation</label>
-              		<textarea name="observation" cols="65" rows="5" th:field="*{observation}"> </textarea>		
+		 <div class="row">
+			<div class="form-group col-sm-12"  th:classappend="${#fields.hasErrors('observation')} ? has-error" >
+					<label for="observation" class="control-label">Observation*</label><br/>
+              		<textarea name="observation"  class="form-control" cols="90" rows="5" th:field="*{observation}"> </textarea>		
 			</div>
-			
+		 </div>	
 			
 			
 			<button type="submit" class="btn btn-primary btn-block">Salvar</button>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
-	layout:decorator="movieTheather/layout/layoutPadrao" th:with="activeTab='listagem'"
+	layout:decorator="movieTheather/layout/layoutPadrao" th:with="activeTab=''"
 >
 
 
@@ -8,15 +8,6 @@
 	<title>Edit movie </title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<style>
-			.jumbotron {
-				width: 1000px;
-				#margin-top: 20px;
-				margin-left: auto;
-				margin-right: auto;
-				padding: 20px 20px 20px 20px;
-			}
-		</style>
 </head>
 
 
@@ -30,11 +21,11 @@
 		
 		<div class="col-sm-6">
 			<div class="thumbnail">
-		                <img th:src="@{/img/{url}(url=${movie.urlCover})}" class=""/>
-		                <div class="caption">
+						 <div class="caption">
 		                     <a href="#" class="btn btn-default btn-xs pull-right" role="button" th:href="@{/movieTheather/editMovie/{id} (id=${movie.idMovie})}"><i class="glyphicon glyphicon-edit"></i></a>  
 		                     <a class="btn btn-default btn-xs pull-right" th:href="@{/movieTheather/removeMovie/{id} (id=${movie.idMovie})}"><span class="red glyphicon glyphicon-remove"></span></a>
 		                </div>
+		                <img th:src="@{/img/{url}(url=${movie.urlCover})}" class=""/>   
 		    </div>
 		 </div>
 		

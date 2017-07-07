@@ -1,27 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
-	layout:decorator="movieTheather/layout/layoutPadrao" th:with="activeTab='listagem'"
+	layout:decorator="movieTheather/layout/layoutPadrao" th:with="activeTab='editCategory'"
 >
 
 <head>
 	<title>Edit a category </title>
 	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
- 	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/bootstrap.min.css}"/>
-	<script th:src="@{/javascripts/jquery-3.2.1.min.js}"></script>
-	<script th:src="@{/javascripts/bootstrap.min.js}"></script>
-	<style>
-			.jumbotron {
-				width: 500px;
-				#margin-top: 20px;
-				margin-left: auto;
-				margin-right: auto;
-				padding: 20px 20px 20px 20px;
-			}
-		</style>
 </head>
-
-
 
 
 <body>
@@ -41,7 +26,6 @@
 				<span class="glyphicon glyphicon-ok" ></span>
 				<span th:text="${mensagem}" ></span>
 			</div>
-		<span th:text="*{idCategory}" ></span>
 			
 			<div class="form-group alert alert-danger" th:if="${#fields.hasAnyErrors()}">
 				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -71,7 +55,7 @@
 			
 			
 			
-			<button type="submit" class="btn btn-primary btn-block">Salvar</button>
+			<button type="submit" class="btn btn-primary btn-block">Save</button>
 			
 		</form>
 		

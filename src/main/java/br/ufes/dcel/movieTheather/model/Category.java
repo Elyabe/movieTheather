@@ -11,8 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-
+import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
@@ -24,16 +26,20 @@ public class Category
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idCategory;
 	
+	@Size(min=3, max= 25)
 	@NotBlank(message="{label.NotBlank}")
 	@Column
 	private String label;
 	
+	@Min(value=1)
+	@Max(value=100)
 	@NotNull(message="{ageLimit.NotNull}")
 	@Column
 	private Long ageLimit;
 	
 	
 	@Column
+	@Size(min=10, max= 200)
 	private String observation;
 	
 	
@@ -42,7 +48,8 @@ public class Category
 
 	
 	@Override
-	public int hashCode() {
+	public int hashCode() 
+	{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((ageLimit == null) ? 0 : ageLimit.hashCode());
@@ -54,7 +61,8 @@ public class Category
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(Object obj)
+	{
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -90,43 +98,53 @@ public class Category
 		return true;
 	}
 
-	public Long getIdCategory() {
+	public Long getIdCategory() 
+	{
 		return idCategory;
 	}
 
-	public void setId(Long idCategory ) {
+	public void setId(Long idCategory ) 
+	{
 		this.idCategory = idCategory;
 	}
 
-	public String getLabel() {
+	public String getLabel() 
+	{
 		return label;
 	}
 
-	public void setLabel(String label) {
+	public void setLabel(String label) 
+	{
 		this.label = label;
 	}
 
-	public Long getAgeLimit() {
+	public Long getAgeLimit() 
+	{
 		return ageLimit;
 	}
 
-	public void setAgeLimit(Long ageLimit) {
+	public void setAgeLimit(Long ageLimit)
+	{
 		this.ageLimit = ageLimit;
 	}
 
-	public String getObservation() {
+	public String getObservation() 
+	{
 		return observation;
 	}
 
-	public void setObservation(String observation) {
+	public void setObservation(String observation) 
+	{
 		this.observation = observation;
 	}
 
-	public List<Movie> getLstMovies() {
+	public List<Movie> getLstMovies() 
+	{
 		return lstMovies;
 	}
 
-	public void setLstMovies(List<Movie> lstMovies) {
+	public void setLstMovies(List<Movie> lstMovies) 
+	{
 		this.lstMovies = lstMovies;
 	}
 	

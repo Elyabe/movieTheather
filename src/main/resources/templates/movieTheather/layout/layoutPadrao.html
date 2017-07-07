@@ -8,39 +8,44 @@
 	<script th:src="@{/javascripts/jquery-3.2.1.min.js}" ></script>	
 	<script th:src="@{/javascripts/bootstrap.min.js}" ></script>
 	<script th:src="@{/javascripts/bootstrap-collapse.js}" ></script>
-<style> 
-	.navbar-brand > img { /*overwrites display:block*/
-		display: inline;
-	 }
-		.jumbotron {
-			width: 440px;			
-			margin-top: 20px;
-			margin-left: auto;
-			margin-right: auto;
-		}
-		.gallery{
-			width: 1000px;
-			background-color:#CFCFCF;
-		}
+	<style> 
+		body {
+				background-image: url("/img/wallpaper_movieTheather_4.jpg");
+				}
+				
+		.navbar-brand > img { /*overwrites display:block*/
+			display: inline;
+		 }
+			.jumbotron {
+				width: 600px;			
+				margin-top: 20px;
+				margin-left: auto;
+				margin-right: auto;
+				padding: 20px 20px 20px 20px;
+			}
+			.gallery{
+				width: 1000px;
+				background-color:#CFCFCF;
+			}
+			
 	</style>
 </head>
 
 <body>
 
 	 <nav class="navbar navbar-inverse">
-		
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="#">Movie Theather</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li ><a href="#" th:href="@{/movieTheather/showMovies}"><span class="glyphicon glyphicon-th-list" ></span> Home</a></li>
-				<li ><a href="#" th:href="@{/movieTheather/newMovie}"><span class="glyphicon glyphicon-plus" ></span> Add Movie</a></li>
-				<li ><a href="#" th:href="@{/movieTheather/newCategory}"><span class="glyphicon glyphicon-plus" ></span> Add Category</a></li>
-				<li ><a href="#" th:href="@{/movieTheather/showCategories}"><span class="glyphicon glyphicon-plus" ></span> Edit Category</a></li>
+				<li th:class="${activeTab =='home'}? 'active' : null "><a href="#" th:href="@{/movieTheather/showMovies}"><span class="glyphicon glyphicon-th-list" ></span> Home</a></li>
+				<li th:class="${activeTab =='addMovie'}? 'active' : null "><a href="#" th:href="@{/movieTheather/newMovie}"><span class="glyphicon glyphicon-plus" ></span> Add Movie</a></li>
+				<li th:class="${activeTab =='addCategory'}? 'active' : null "><a href="#" th:href="@{/movieTheather/newCategory}"><span class="glyphicon glyphicon-plus" ></span> Add Category</a></li>
+				<li th:class="${activeTab =='myCategories'}? 'active' : null "><a href="#" th:href="@{/movieTheather/showCategories}"><span class="glyphicon glyphicon-plus" ></span> My Categories</a></li>
 			</ul>
 		</div>
-	</nav>
+	  </nav>
 	<section layout:fragment="conteudo">	
 	</section>
 	
