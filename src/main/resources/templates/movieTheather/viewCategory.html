@@ -42,7 +42,7 @@
 			</thead>
 		<tbody>
 			<tr th:each="movie : ${category.lstMovies}">
-				<td> <a th:href="@{/movieTheather/view/{id}(id=${movie.idMovie})}" th:text="${movie.title}"></a></td>
+				<td> <a th:href="@{/movieTheather/viewMovie/{id}(id=${movie.idMovie})}" th:text="${movie.title}"></a></td>
 				<td th:text="*{yearRelease}"></td>
 			</tr>
 			<tr th:if="${category.lstMovies.empty}">
