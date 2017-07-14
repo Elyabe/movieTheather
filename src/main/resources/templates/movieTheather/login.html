@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+
+<head>
+	<title>Beer - Login</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/bootstrap.min.css}"/>
+	<script th:src="@{/javascripts/jquery-3.2.1.min.js}"></script>
+	<script th:src="@{/javascripts/bootstrap.min.js}"></script>
+	<style>
+		.jumbotron {
+			width: 440px;
+			text-align: center;
+			#margin-top: 20px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+	</style>
+</head>
+
+
+<body>  
+  <div class="jumbotron">
+	<h1>Login</h1>
+	
+	<form method="POST" th:action="@{/login}">
+	
+		<div class="form-group">
+			<label for="username" class="control-label">Usuário</label>
+			<input id="username" name="username" type="text" class="form-control"/> <br/>
+		</div>
+		<div class="form-group">
+			<label for="password" class="control-label">Senha</label>
+			<input id="password" name="password" type="password" class="form-control"/> <br/>
+		</div>
+		
+		<div class="form-group">
+			<input type="checkbox" name="remember-me" /> <label for="remember-me" class="control-label">Lembrar-me</label>
+		</div>
+
+		<button type="submit" class="btn btn-primary btn-block">Login</button>
+	</form>
+  </div>
+</body>
+</html>
