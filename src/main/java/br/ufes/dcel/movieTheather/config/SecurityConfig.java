@@ -18,10 +18,13 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
  		http
  		 		.authorizeRequests()
  		 		//.antMatchers("/beer/novo/**").hasRole("CADASTRAR_CERVEJA") Role movida para o controller
- 		 		.anyRequest().authenticated()
- 				.and().formLogin()
- 				.loginPage("/login").permitAll()
- 				.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/movieTheather/logout"));
+ 				.anyRequest().authenticated()
+ 				 				.and()
+ 				 					.formLogin().loginPage("/login").permitAll()
+ 				 				.and().
+ 				 					logout().logoutRequestMatcher(new AntPathRequestMatcher("/movieTheather/logout"))
+ 				 				.and()
+ 				 					.rememberMe();
  		
  	}
  	
