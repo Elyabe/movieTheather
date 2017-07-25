@@ -1,5 +1,8 @@
-<!DOCTYPE html>
-<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" >
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+  	xmlns:th="http://www.thymeleaf.org"
+  	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+ 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+  >
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -39,11 +42,20 @@
 				<a class="navbar-brand" href="#">Movie Theather</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li th:class="${activeTab =='home'}? 'active' : null "><a href="#" th:href="@{/movieTheather/showMovies}"><span class="glyphicon glyphicon-th-list" ></span> Home</a></li>
-				<li th:class="${activeTab =='addMovie'}? 'active' : null "><a href="#" th:href="@{/movieTheather/newMovie}"><span class="glyphicon glyphicon-plus" ></span> Add Movie</a></li>
-				<li th:class="${activeTab =='addCategory'}? 'active' : null "><a href="#" th:href="@{/movieTheather/newCategory}"><span class="glyphicon glyphicon-plus" ></span> Add Category</a></li>
-				<li th:class="${activeTab =='myCategories'}? 'active' : null "><a href="#" th:href="@{/movieTheather/showCategories}"><span class="glyphicon glyphicon-plus" ></span> My Categories</a></li>
-			</ul>
+				<li th:class="${activeTab =='home'}? 'active' : null " ><a href="#" th:href="@{/movieTheather/showMovies}"><span class="glyphicon glyphicon-th-list" ></span> Home</a></li>
+				<li th:class="${activeTab =='addMovie'}? 'active' : null " th:if="${#authorization.expression('hasRole(''admin'')')}"><a href="#" th:href="@{/movieTheather/newMovie}"><span class="glyphicon glyphicon-plus" ></span> Add Movie</a></li>
+				<li th:class="${activeTab =='addCategory'}? 'active' : null " th:if="${#authorization.expression('hasRole(''admin'')')}"><a href="#" th:href="@{/movieTheather/newCategory}"><span class="glyphicon glyphicon-plus" ></span> Add Category</a></li>
+				<li th:class="${activeTab =='myCategories'}? 'active' : null " th:if="${#authorization.expression('hasRole(''admin'')')}"><a href="#" th:href="@{/movieTheather/showCategories}"><span class="glyphicon glyphicon-plus" ></span> My Categories</a></li>
+  			</ul>
+  			<ul class="nav navbar-nav navbar-right">
+ 			<li>
+ 					<p class="navbar-text" th:text="${#authentication.name}"></p>
+ 				</li>
+  				<li><a href="#" th:href="@{/movieTheather/logout}">
+  					<span class="glyphicon glyphicon-log-out" >
+  					</span>Logout</a>
+ 				</li>
+ 			</ul>
 		</div>
 	  </nav>
 	<section layout:fragment="conteudo">	

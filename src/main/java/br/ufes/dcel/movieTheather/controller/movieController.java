@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,6 +51,7 @@ public class movieController
           return mv;
       }
       
+      @PreAuthorize("hasRole('admin')")
       @RequestMapping(value="/newMovie")
       public ModelAndView newMovie( Movie movie ) 
       {   
@@ -61,6 +63,7 @@ public class movieController
     	  return mv;
       }
       
+      @PreAuthorize("hasRole('admin')")
       @RequestMapping(value = "/saveMovie", method = RequestMethod.POST)
       public ModelAndView addMovie( @Valid Movie movie,
     		  BindingResult result, RedirectAttributes attribute )
@@ -79,6 +82,7 @@ public class movieController
             return new ModelAndView("redirect:/movieTheather/newMovie");
       }
       
+      	@PreAuthorize("hasRole('admin')")
 	    @RequestMapping("/editMovie/{idMovie}")
 	  	public ModelAndView editMovie( @PathVariable("idMovie") Movie movie )
 	  	{
@@ -98,7 +102,7 @@ public class movieController
 	  	}
 	    
 	      
-	    
+	    @PreAuthorize("hasRole('admin')")
 	    @RequestMapping(value="/updateMovie", method=RequestMethod.POST)
 		public ModelAndView updateMovie(@Valid Movie movie, BindingResult result, RedirectAttributes attribute )
 		{
@@ -115,11 +119,11 @@ public class movieController
 		}
 	    
 	     @RequestMapping("/removeMovie/{id}")
+	     @PreAuthorize("hasRole('admin')")
 	 	 public String remove( @PathVariable("id") Movie movie )
 	 	 {
 	    	  this.myMovies.delete(movie);;
 	 		 return "redirect:/movieTheather/showMovies";
 	 	 }
-     
-
+	    
 }

@@ -34,7 +34,7 @@
 		                     <h4 class="text" th:text="${movie.title}"></h4>
 						 	 <a th:href="@{/movieTheather/showMoviesbyCategory/{id}(id=${movie.category.idCategory})}"> <span class="label label-default" th:text="${movie.category.label}"></span></a>
 		                    <p class="" th:text="${movie.sinopse}"></p>
-		                     <a href="#" class="btn btn-default btn-xs pull-right" role="button" th:href="@{/movieTheather/editMovie/{id} (id=${movie.idMovie})}"><i class="glyphicon glyphicon-edit"></i></a>  
+		                     <a href="#" class="btn btn-default btn-xs pull-right" th:if="${#authorization.expression('hasRole(''admin'')')}" role="button" th:href="@{/movieTheather/editMovie/{id} (id=${movie.idMovie})}"><i class="glyphicon glyphicon-edit"></i></a>  
 		                     <a class="btn btn-default btn-xs pull-right" th:href="@{/movieTheather/removeMovie/{id} (id=${movie.idMovie})}"><span class="red glyphicon glyphicon-remove"></span></a>
 		                     <a href="#" class="btn btn-default btn-xs" role="button" th:href="@{/movieTheather/viewMovie/{id}(id=${movie.idMovie})}">More Info</a>
 							
