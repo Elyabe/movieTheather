@@ -43,9 +43,11 @@
 			</div>
 			<ul class="nav navbar-nav">
 				<li th:class="${activeTab =='home'}? 'active' : null " ><a href="#" th:href="@{/movieTheather/showMovies}"><span class="glyphicon glyphicon-th-list" ></span> Home</a></li>
-				<li th:class="${activeTab =='addMovie'}? 'active' : null " th:if="${#authorization.expression('hasRole(''admin'')')}"><a href="#" th:href="@{/movieTheather/newMovie}"><span class="glyphicon glyphicon-plus" ></span> Add Movie</a></li>
-				<li th:class="${activeTab =='addCategory'}? 'active' : null " th:if="${#authorization.expression('hasRole(''admin'')')}"><a href="#" th:href="@{/movieTheather/newCategory}"><span class="glyphicon glyphicon-plus" ></span> Add Category</a></li>
-				<li th:class="${activeTab =='myCategories'}? 'active' : null " th:if="${#authorization.expression('hasRole(''admin'')')}"><a href="#" th:href="@{/movieTheather/showCategories}"><span class="glyphicon glyphicon-plus" ></span> My Categories</a></li>
+				<li th:class="${activeTab =='addMovie'}? 'active' : null " th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}"><a href="#" th:href="@{/movieTheather/newMovie}"><span class="glyphicon glyphicon-plus" ></span> Add Movie</a></li>
+				<li th:class="${activeTab =='addCategory'}? 'active' : null " th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}"><a href="#" th:href="@{/movieTheather/newCategory}"><span class="glyphicon glyphicon-plus" ></span> Add Category</a></li>
+				<li th:class="${activeTab =='myCategories'}? 'active' : null " th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}"><a href="#" th:href="@{/movieTheather/showCategories}"><span class="glyphicon glyphicon-plus" ></span> My Categories</a></li>
+				<li th:class="${activeTab =='addUser'}? 'active' : null " th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}"><a href="#" th:href="@{/movieTheather/newUser}"><span class="glyphicon glyphicon-plus" ></span> Add User</a></li>
+				
   			</ul>
   			<ul class="nav navbar-nav navbar-right">
  			<li>

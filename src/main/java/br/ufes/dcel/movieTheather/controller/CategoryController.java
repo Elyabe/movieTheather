@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +32,7 @@ public class CategoryController
 	 }
 	 
 	 @RequestMapping(value = "/saveCategory", method = RequestMethod.POST)
+	 @PreAuthorize("hasAuthority('ADMIN')")
      public ModelAndView saveCategory( @Valid Category category, BindingResult result, RedirectAttributes attribute ) 
 	 {
            if ( result.hasErrors() )
@@ -59,12 +61,14 @@ public class CategoryController
      
 	 
 	 @RequestMapping(value = "/newCategory")
+	 @PreAuthorize("hasAuthority('ADMIN')")
      public ModelAndView addCategory( Category category ) 
 	 {
            return new ModelAndView("/movieTheather/addCategory");
      }
 	
 		@RequestMapping("/editCategory/{idCategory}")
+		@PreAuthorize("hasAuthority('ADMIN')")
 	  	public ModelAndView editCategory( @PathVariable("idCategory") Category category )
 	  	{
 	  		System.out.println("Id ao prencher" + category.getIdCategory());
@@ -76,6 +80,7 @@ public class CategoryController
 		 
 		 
 		@RequestMapping(value="/updateCategory/{idCategory}", method=RequestMethod.POST)
+		@PreAuthorize("hasAuthority('ADMIN')")
 		public ModelAndView updateCategory(@PathVariable("idCategory") Long id, Category category, 
 				BindingResult result, RedirectAttributes attribute )
 		{
@@ -95,6 +100,7 @@ public class CategoryController
 		}
 		
 		 @RequestMapping("/removeConfirmCategory/{idMovie}")
+		 @PreAuthorize("hasAuthority('ADMIN')")
 	 	 public ModelAndView removeConfirm(@PathVariable("idMovie") Category category )
 	 	 {
 	    	 ModelAndView mv = new ModelAndView("/movieTheather/viewCategory");
@@ -104,6 +110,7 @@ public class CategoryController
 		
 		
 		 @RequestMapping("/removeCategory/{id}")
+		 @PreAuthorize("hasAuthority('ADMIN')")
 	 	 public ModelAndView remove( @PathVariable("id") Category category)
 	 	 {
 	    	 myCategories.delete(category);

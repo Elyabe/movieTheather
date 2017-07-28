@@ -7,6 +7,53 @@
 	<title>Movies</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	<script>
+	var updateTable = function(data) {
+		$('#tabela-ajax tbody > tr').remove();
+		
+		var tableBody = $('#tabela-ajax tbody');
+		if(data.length==0) {
+			tableBody.append(
+				'<tr><td colspan="7">Not found!</td></tr>');
+		}
+		
+		
+		$.each(data, function(i, item) {
+			//constrói cada linha da tabela
+			tableBody.append('<tr><td>' + item.idMovie + 
+					 '</td><td><a href="/beer/' + item.idMovie + '">' + item.title + '</a>' +  
+					 '</td></tr>');
+		});
+	};	
+		
+	var ajaxOptions = {
+			type : "GET",
+			url : "/pesquisaAjax",
+			success : updateTable,	
+	};
+	
+	$(document).ready(function() {
+		$.ajax(ajaxOptions);
+		
+		$("button").click(function(e){
+			e.preventDefault();
+			$.ajax({type : "GET",
+				url : "/pesquisaAjax",
+				data : {
+					"title" : $('#title').val(),
+					"category" : $('#category').val(),
+				},
+				success: updateTable
+					
+					
+				});
+			
+			 
+		});
+	});
+</script>	
+
 </head>
 
 <body>
@@ -26,6 +73,45 @@
 			<span th:text="${message}" ></span>
 		</div> 
 			
+			
+			 <form method="GET" th:object="${movie}" th:action="@{/pesquisaAjax}">
+			<div class="row">			
+				 <div class="form-group col-sm-4">
+					<label for="title" class="control-label">Nome</label>
+					<input id="title" type="text" th:field="*{title}" class="form-control"/> <br/>
+				</div>
+				 <div class="form-group col-sm-2">
+					<label for="category" class="control-label">Tipo</label>
+					<select id="category" class="form-control" th:field="*{category}">
+						<option value="">Selecione o tipo</option>
+						<option th:each="categoryOp : ${lstCategory}" th:value="${categoryOp}" th:text="${categoryOp.label}"></option>
+					</select>
+				</div> 	
+				
+				<div class="form-group col-sm-2">
+				<label></label>
+				<button type="submit" class="btn btn-primary btn-block">Pesquisar</button>
+				
+			</div>
+			</div>
+		</form> 
+		
+		<div class="table-responsive">
+				<table id="tabela-ajax" 
+					   class="table table-striped table-bordered table-hover table-condensed">
+					<thead>
+				<tr>
+					<th>title</th>
+					<th>Category</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+			
 		    <div  class="row">
 		        <div th:each="movie : ${movies}"  class="col-sm-2">
 		            <div class="thumbnail">
@@ -34,8 +120,8 @@
 		                     <h4 class="text" th:text="${movie.title}"></h4>
 						 	 <a th:href="@{/movieTheather/showMoviesbyCategory/{id}(id=${movie.category.idCategory})}"> <span class="label label-default" th:text="${movie.category.label}"></span></a>
 		                    <p class="" th:text="${movie.sinopse}"></p>
-		                     <a href="#" class="btn btn-default btn-xs pull-right" th:if="${#authorization.expression('hasRole(''admin'')')}" role="button" th:href="@{/movieTheather/editMovie/{id} (id=${movie.idMovie})}"><i class="glyphicon glyphicon-edit"></i></a>  
-		                     <a class="btn btn-default btn-xs pull-right" th:href="@{/movieTheather/removeMovie/{id} (id=${movie.idMovie})}"><span class="red glyphicon glyphicon-remove"></span></a>
+		                     <a href="#" class="btn btn-default btn-xs pull-right" th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" role="button" th:href="@{/movieTheather/editMovie/{id} (id=${movie.idMovie})}"><i class="glyphicon glyphicon-edit"></i></a>  
+		                     <a th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" class="btn btn-default btn-xs pull-right" th:href="@{/movieTheather/removeMovie/{id} (id=${movie.idMovie})}"><span class="red glyphicon glyphicon-remove"></span></a>
 		                     <a href="#" class="btn btn-default btn-xs" role="button" th:href="@{/movieTheather/viewMovie/{id}(id=${movie.idMovie})}">More Info</a>
 							
 		                </div>

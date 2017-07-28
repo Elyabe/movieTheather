@@ -6,7 +6,9 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,17 +43,20 @@ public class movieController
       }
       
       @RequestMapping(value="/showMovies")
-      public ModelAndView showMoviess() 
+      public ModelAndView showMoviess(@ModelAttribute Movie movie,
+    		  BindingResult bindingResult, Model model) 
+   
       {
     	  ModelAndView mv = new ModelAndView("/movieTheather/listMovies");
     	  List<Movie> listaMovies = myMovies.findAll();
           if (listaMovies != null) {
                 mv.addObject("movies", listaMovies );
           }
+          mv.addObject("lstCategory", myCategories.findAll() );
           return mv;
       }
       
-      @PreAuthorize("hasRole('admin')")
+      @PreAuthorize("hasAuthority('ADMIN')")
       @RequestMapping(value="/newMovie")
       public ModelAndView newMovie( Movie movie ) 
       {   
@@ -63,7 +68,7 @@ public class movieController
     	  return mv;
       }
       
-      @PreAuthorize("hasRole('admin')")
+      @PreAuthorize("hasAuthority('ADMIN')")
       @RequestMapping(value = "/saveMovie", method = RequestMethod.POST)
       public ModelAndView addMovie( @Valid Movie movie,
     		  BindingResult result, RedirectAttributes attribute )
@@ -82,7 +87,7 @@ public class movieController
             return new ModelAndView("redirect:/movieTheather/newMovie");
       }
       
-      	@PreAuthorize("hasRole('admin')")
+      	@PreAuthorize("hasAuthority('ADMIN')")
 	    @RequestMapping("/editMovie/{idMovie}")
 	  	public ModelAndView editMovie( @PathVariable("idMovie") Movie movie )
 	  	{
@@ -102,7 +107,7 @@ public class movieController
 	  	}
 	    
 	      
-	    @PreAuthorize("hasRole('admin')")
+	    @PreAuthorize("hasAuthority('ADMIN')")
 	    @RequestMapping(value="/updateMovie", method=RequestMethod.POST)
 		public ModelAndView updateMovie(@Valid Movie movie, BindingResult result, RedirectAttributes attribute )
 		{
@@ -119,7 +124,7 @@ public class movieController
 		}
 	    
 	     @RequestMapping("/removeMovie/{id}")
-	     @PreAuthorize("hasRole('admin')")
+	     @PreAuthorize("hasAuthority('ADMIN')")
 	 	 public String remove( @PathVariable("id") Movie movie )
 	 	 {
 	    	  this.myMovies.delete(movie);;
